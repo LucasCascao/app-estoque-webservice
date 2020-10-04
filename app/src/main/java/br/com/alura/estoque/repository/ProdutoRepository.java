@@ -9,7 +9,7 @@ import br.com.alura.estoque.database.EstoqueDatabase;
 import br.com.alura.estoque.database.dao.ProdutoDAO;
 import br.com.alura.estoque.model.Produto;
 import br.com.alura.estoque.retrofit.EstoqueRetrofit;
-import br.com.alura.estoque.retrofit.callback.BaseCallback;
+import br.com.alura.estoque.retrofit.callback.CallbackComRetorno;
 import br.com.alura.estoque.retrofit.callback.CallbackSemRetorno;
 import br.com.alura.estoque.retrofit.service.ProdutoService;
 import retrofit2.Call;
@@ -40,7 +40,7 @@ public class ProdutoRepository {
     private void buscaProdutosNaApi(DadosCarregadosCallback<List<Produto>> callback) {
         Call<List<Produto>> call = service.buscaTodos();
 
-        call.enqueue(new BaseCallback<>(new BaseCallback.ResponseCallback<List<Produto>>() {
+        call.enqueue(new CallbackComRetorno<>(new CallbackComRetorno.ResponseCallback<List<Produto>>() {
             @Override
             public void quandoSucesso(List<Produto> produtos) {
                 atualizaInterno(produtos, callback);
@@ -66,7 +66,7 @@ public class ProdutoRepository {
 
     private void salvaNaApi(Produto produto, DadosCarregadosCallback<Produto> callback) {
         Call<Produto> call = service.salva(produto);
-        call.enqueue(new BaseCallback<>(new BaseCallback.ResponseCallback<Produto>() {
+        call.enqueue(new CallbackComRetorno<>(new CallbackComRetorno.ResponseCallback<Produto>() {
             @Override
             public void quandoSucesso(Produto produtoSalvo) {
                 salvaInterno(produtoSalvo, callback);
@@ -93,7 +93,7 @@ public class ProdutoRepository {
 
     private void editaNaApi(Produto produto, DadosCarregadosCallback<Produto> callback) {
         Call<Produto> call = service.edita(produto.getId(), produto);
-        call.enqueue(new BaseCallback<>(new BaseCallback.ResponseCallback<Produto>() {
+        call.enqueue(new CallbackComRetorno<>(new CallbackComRetorno.ResponseCallback<Produto>() {
             @Override
             public void quandoSucesso(Produto produtoEditado) {
                 editaInterno(produtoEditado, callback);

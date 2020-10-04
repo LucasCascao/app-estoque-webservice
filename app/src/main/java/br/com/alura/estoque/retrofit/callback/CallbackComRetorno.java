@@ -8,11 +8,11 @@ import retrofit2.internal.EverythingIsNonNull;
 import static br.com.alura.estoque.retrofit.callback.MensagemCallback.MENSAGEM_ERRO_FALHA_COMUNICACAO;
 import static br.com.alura.estoque.retrofit.callback.MensagemCallback.MENSAGEM_ERRO_RESPOSTA_NAO_SUCEDIDA;
 
-public class BaseCallback <T> implements Callback<T> {
+public class CallbackComRetorno<T> implements Callback<T> {
 
     private final ResponseCallback<T> responseCallback;
 
-    public BaseCallback(ResponseCallback<T> responseCallback) {
+    public CallbackComRetorno(ResponseCallback<T> responseCallback) {
         this.responseCallback = responseCallback;
     }
 
